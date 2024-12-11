@@ -11,7 +11,7 @@ try {
     $dbname = "simoweb1-database";
     $ssl = true;
 
-    // Construction de l'URI
+    // URI de connexion
     $uri = sprintf(
         "mongodb://%s:%s@%s:%d/?ssl=%s",
         $username,
@@ -33,13 +33,18 @@ try {
     $collection = $db->selectCollection("mycol");
     echo "Collection selected successfully<br>";
 
-    // Récupération des documents
-    $cursor = $collection->find();
+    // Préparation du document à insérer
+    $document = [
+        "title" => "Nouveau document",
+        "description" => "Ceci est un document inséré dans MongoDB.",
+        "created_at" => new MongoDB\BSON\UTCDateTime()
+    ];
 
-    // Parcourir les documents
-    foreach ($cursor as $document) {
-        echo $document["title"] . "<br>";
-    }
+    // Insertion du document dans la collection
+    $result = $collection->insertOne($document);
+
+    // Afficher l'ID du document inséré
+    echo "Document inserted successfully with ID: " . $result->getInsertedId() . "<br>";
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
 }
