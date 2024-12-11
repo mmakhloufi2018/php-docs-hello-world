@@ -33,8 +33,9 @@ try {
     $collection = $db->selectCollection("mycol");
     echo "Collection selected successfully<br>";
 
-    // Préparation du document à insérer
+    // Préparation du document à insérer avec shard key
     $document = [
+        "partitionKey" => "M@na1988", // Shard key obligatoire
         "title" => "Nouveau document",
         "description" => "Ceci est un document inséré dans MongoDB.",
         "created_at" => new MongoDB\BSON\UTCDateTime()
