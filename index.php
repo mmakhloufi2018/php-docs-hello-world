@@ -11,14 +11,13 @@ try {
     $dbname = "simoweb1-database";
     $ssl = true;
 
-    // URI de connexion
+    // Construction de l'URI
     $uri = sprintf(
-        "mongodb://%s:%s@%s:%d/%s?ssl=%s",
+        "mongodb://%s:%s@%s:%d/?ssl=%s",
         $username,
         urlencode($password),
         $host,
         $port,
-        $dbname,
         $ssl ? 'true' : 'false'
     );
 
@@ -45,4 +44,3 @@ try {
     echo "Error: " . $e->getMessage();
 }
 ?>
-
