@@ -11,9 +11,9 @@ try {
     $dbname = "simoweb1-database";
     $ssl = true;
 
-    // URI de connexion
+    // Construction de l'URI avec retryWrites désactivé
     $uri = sprintf(
-        "mongodb://%s:%s@%s:%d/?ssl=%s",
+        "mongodb://%s:%s@%s:%d/?ssl=%s&retryWrites=false",
         $username,
         urlencode($password),
         $host,
